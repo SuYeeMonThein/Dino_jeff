@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Little Dino's Love Run</title>
+<meta name="description" content="A cute endless-runner gift game: help Little Dino run as far as it can." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <main class="game-wrap">
+    <div class="game-card" id="gameCard">
+
+      <canvas id="gameCanvas" aria-label="Little Dino's Love Run game screen"></canvas>
+
+      <!-- Heads-up display: hearts collected (top-left) and score (top-right) -->
+      <div class="hud" id="hud">
+        <div class="hud-item hud-hearts">
+          <span aria-hidden="true">💗</span>
+          <span id="heartsCount">0</span>
+        </div>
+        <div class="hud-item hud-score">
+          <span aria-hidden="true">⭐</span>
+          <span id="scoreCount">0</span>
+        </div>
+      </div>
+
+      <!-- Milestone toast banner -->
+      <div class="toast" id="toast" aria-live="polite"></div>
+
+      <!-- Start screen -->
+      <section class="overlay" id="startScreen">
+        <div class="card">
+          <h1>For my love 💌</h1>
+          <p>Help Little Dino run as far as you can.</p>
+          <button type="button" class="btn" id="startBtn">Start game</button>
+          <p class="hint">Space / ↑ / W / Tap to jump — hold for a higher jump</p>
+        </div>
+      </section>
+
+      <!-- Game over screen -->
+      <section class="overlay hidden" id="gameOverScreen">
+        <div class="card">
+          <h2>Oops&hellip; caught in the thorns</h2>
+          <p class="stat">Score: <strong id="finalScore">0</strong></p>
+          <p class="stat">Hearts collected: <strong id="finalHearts">0</strong></p>
+          <p class="stat">Best score: <strong id="bestScore">0</strong></p>
+          <p class="note" id="encourageNote"></p>
+          <button type="button" class="btn" id="restartBtn">Play again</button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+<script src="game.js"></script>
+</body>
+</html>
