@@ -32,6 +32,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 16px;
+  padding-top: max(16px, env(safe-area-inset-top));
   font-family: "Baloo 2", "Comic Sans MS", "Trebuchet MS", sans-serif;
   color: var(--ink);
   background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 55%, var(--sky-bottom) 100%);
@@ -121,8 +122,14 @@ body {
 }
 
 /* ---------- Overlays (start / game over) ---------- */
+/* Fixed to the whole viewport (not just the game card): the game card
+   is only ~2:1 — on a tall phone it's too short to fit this card's
+   text, so pinning the overlay to the card would either clip the
+   content or force the card to spill outside the card's rounded
+   corners. Centering it on the full screen instead guarantees every
+   word fits and reads as a normal centered modal. */
 .overlay {
-  position: absolute;
+  position: fixed;
   inset: 0;
   display: flex;
   align-items: center;
@@ -140,56 +147,60 @@ body {
 .overlay .card {
   background: var(--card-bg);
   border-radius: var(--radius-lg);
-  padding: clamp(20px, 5vw, 36px);
-  max-width: 420px;
+  padding: clamp(14px, 4vw, 26px);
+  max-width: 280px;
   width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
   text-align: center;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
 }
 
 .overlay h1 {
-  margin: 0 0 10px;
-  font-size: clamp(22px, 6vw, 30px);
+  margin: 0 0 8px;
+  font-size: clamp(17px, 4.5vw, 21px);
   color: var(--pink-dark);
 }
 
 .overlay h2 {
-  margin: 0 0 14px;
-  font-size: clamp(19px, 5vw, 24px);
+  margin: 0 0 10px;
+  font-size: clamp(15px, 4vw, 18px);
   color: var(--pink-dark);
 }
 
 .overlay p {
-  margin: 6px 0;
-  line-height: 1.4;
+  margin: 4px 0;
+  font-size: clamp(12px, 3vw, 14px);
+  line-height: 1.35;
 }
 
 .overlay .hint {
-  margin-top: 14px;
-  font-size: 13px;
+  margin-top: 10px;
+  font-size: 10px;
   opacity: 0.65;
 }
 
 .overlay .stat {
-  font-size: clamp(14px, 4vw, 17px);
+  font-size: clamp(12px, 3vw, 14px);
 }
 
 .overlay .note {
-  margin-top: 12px;
+  margin-top: 8px;
+  font-size: clamp(12px, 3vw, 14px);
   font-weight: 700;
   color: var(--pink-dark);
 }
 
 .btn {
-  margin-top: 16px;
+  margin-top: 10px;
   border: none;
   cursor: pointer;
   font-family: inherit;
   font-weight: 700;
-  font-size: clamp(15px, 4vw, 18px);
+  font-size: clamp(13px, 3.2vw, 15px);
   color: #fff;
   background: linear-gradient(180deg, var(--pink) 0%, var(--pink-dark) 100%);
-  padding: 12px 28px;
+  padding: 9px 20px;
   border-radius: var(--radius-md);
   box-shadow: 0 8px 18px rgba(232, 84, 140, 0.45);
   transition: transform 0.12s ease, box-shadow 0.12s ease;
@@ -217,8 +228,10 @@ body {
 @media (max-width: 420px) {
   body {
     padding: 8px;
+    padding-top: max(8px, env(safe-area-inset-top));
   }
   .game-card {
     border-radius: 16px;
   }
 }
+
